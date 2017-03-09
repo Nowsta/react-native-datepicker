@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   Modal,
+  TouchableOpacity,
   TouchableHighlight,
   DatePickerAndroid,
   TimePickerAndroid,
@@ -262,7 +263,8 @@ class DatePicker extends Component {
       minuteInterval,
       timeZoneOffsetInMinutes,
       cancelBtnText,
-      confirmBtnText
+      confirmBtnText,
+      children,
     } = this.props;
 
     const dateInputStyle = [
@@ -272,19 +274,13 @@ class DatePicker extends Component {
     ];
 
     return (
-      <TouchableHighlight
-        style={[Style.dateTouch, style]}
+      <TouchableOpacity
+        style={style}
         underlayColor={'transparent'}
         onPress={this.onPressDate}
       >
-        <View style={[Style.dateTouchBody, customStyles.dateTouchBody]}>
-          <View style={dateInputStyle}>
-            {this.getTitleElement()}
-          </View>
-          {showIcon && <Image
-            style={[Style.dateIcon, customStyles.dateIcon]}
-            source={iconSource}
-          />}
+        <View>
+          {children}
           {Platform.OS === 'ios' && <Modal
             transparent={true}
             animationType="none"
@@ -342,7 +338,7 @@ class DatePicker extends Component {
             </View>
           </Modal>}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }
